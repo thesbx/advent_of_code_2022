@@ -31,16 +31,19 @@ for i in lib:
     if i.get(answer) != None:
         print(f"Elf #{i.get(answer)} is carrying the most with a total of {f(answer)} kcals")
 
-def get_top_items_from_array(arr, n):
+
+# Part 2 Answer
+# function to find n largest elements in a list
+def find_n_largest(arr, n):
     collection = []
     for i in range(0, n):
         max = 0
         for j in range(len(arr)):
-            max = arr[j]
+            if arr[j] > max:
+                max = arr[j]
         arr.remove(max)
         collection.append(max)
     return(collection)
 
-answer_two = sum(get_top_items_from_array(arr, 3))
-
+answer_two = sum(find_n_largest(arr, 3))
 print(f"The top 3 Elves are carrying a total of {f(answer_two)} kcals")
