@@ -9,22 +9,31 @@ elves = [[int(line) for line in elf.split("\n") if line != ""] for elf in lines.
 def f(number):
     return ("{:,}".format(number))
 
-def largest(arr, n):
+def find_largest(arr):
     max = arr[0]
-    for i in range(1, n):
-        if arr[i] > max:
-            max = arr[i]
+    for i in arr:
+        if i > max:
+            max = i
     return max
+
+# function to find n largest elements in a list
+def find_n_largest(arr, n):
+    nlargest = []
+    for i in range(0, n):
+        largest = find_largest(arr)
+        nlargest.append(largest)
+        arr.remove(largest)
+    return nlargest
 
 def sum(arr):
     sum = 0
     for i in arr:
-        sum += i
+        sum = sum + i
     return(sum)
 
 arr = [sum(elf) for elf in elves]
 lib = [{sum(elf): elves.index(elf)} for elf in elves]
-answer = largest(arr, len(arr))
+answer = find_largest(arr)
 
 # Part 1 Answer
 for i in lib:
@@ -33,16 +42,6 @@ for i in lib:
 
 
 # Part 2 Answer
-# function to find n largest elements in a list
-def nlargest(arr, n):
-    nlargest = []
-    for i in range(0, n):
-        largest = largest(arr, len(arr))
-        nlargest.append(largest)
-        arr.remove(largest)
-    return nlargest
-
-answer_two = sum(nlargest(arr, 3))
-top_elves = nlargest(arr, 3)
+top_elves = find_n_largest(arr, 3)
 print(f"Top 3 elves: {top_elves}")
-print(f"The top 3 Elves are carrying a total of {f(answer_two)} kcals")
+print(f"The top 3 Elves are carrying a total of {f(sum(top_elves))} kcals")
