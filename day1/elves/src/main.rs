@@ -1,6 +1,6 @@
 use std::fs;
 
-// function to find sum of items in a vector
+/// Returns the sum of all items in a vector.
 fn sum(items: &Vec<i32>) -> i32 {
     let mut sum = 0;
     for item in items {
@@ -9,7 +9,7 @@ fn sum(items: &Vec<i32>) -> i32 {
     sum
 }
 
-// function to find the largest item in a vector
+/// Returns the largest number in a vector.
 fn largest(items: &Vec<i32>) -> i32 {
     let mut largest = items[0];
     for item in items {
@@ -20,7 +20,7 @@ fn largest(items: &Vec<i32>) -> i32 {
     largest
 }
 
-// function to find n largest items in a vector
+/// Return N number of largest numbers in a vector.
 fn nlargest(items: &Vec<i32>, n: usize) -> Vec<i32> {
     let mut nlargest = Vec::new();
     let mut items = items.clone();
@@ -32,7 +32,7 @@ fn nlargest(items: &Vec<i32>, n: usize) -> Vec<i32> {
     nlargest
 }
 
-// function to parse file into vector of integers grouped by \n\n
+/// Parses a file and returns a vector of integers grouped into smaller vectors.
 fn parse_file(filename: &str) -> Vec<Vec<i32>> {
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
     let mut groups = Vec::new();
