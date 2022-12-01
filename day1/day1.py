@@ -6,6 +6,9 @@ lines = file.read()
 
 elves = [[int(line) for line in elf.split("\n") if line != ""] for elf in lines.split("\n\n")]
 
+def f(number):
+    return ("{:,}".format(number))
+
 def find_largest(arr, n):
     max = arr[0]
     for i in range(1, n):
@@ -22,26 +25,22 @@ def sum(arr):
 arr = [sum(elf) for elf in elves]
 lib = [{sum(elf): elves.index(elf)} for elf in elves]
 answer = find_largest(arr, len(arr))
-top3 = []
 
-
+# Part 1 Answer
 for i in lib:
     if i.get(answer) != None:
-        print(f"Elf #{i.get(answer)} is carrying {answer}kcals")
+        print(f"Elf #{i.get(answer)} is carrying the most with a total of {f(answer)} kcals")
 
-def findTop3(arr):
-    third = first = second = -sys.maxsize
+def get_top_items_from_array(arr, n):
+    collection = []
+    for i in range(0, n):
+        max = 0
+        for j in range(len(arr)):
+            max = arr[j]
+        arr.remove(max)
+        collection.append(max)
+    return(collection)
 
-    for i in range(0, len(arr)):
-        if (arr[i] > first):
-                   third = second
-                   second = first
-                   first = arr[i]
-        elif (arr[i] > second):
-                   third = second
-                   second = arr[i]
-        elif (arr[i] > third):
-                   third = arr[i]
-    print(first + second + third)
+answer_two = sum(get_top_items_from_array(arr, 3))
 
-findTop3(arr)
+print(f"The top 3 Elves are carrying a total of {f(answer_two)} kcals")
