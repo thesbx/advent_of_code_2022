@@ -45,6 +45,7 @@ fn parse_file(filename: &str) -> Vec<Vec<i32>> {
     }
     groups
 }
+
 fn main() {
     let items = parse_file("../list.txt");
 
@@ -55,7 +56,7 @@ fn main() {
     }
 
     let top_elves: Vec<i32> = nlargest(&elves, 3);
-    
+
     println!("Top 3 elves: {:?}", top_elves);
     println!("{:?}", largest(&elves));
     println!("{:?}", sum(&top_elves));
