@@ -32,37 +32,30 @@ fn nlargest(items: &Vec<i32>, n: usize) -> Vec<i32> {
     nlargest
 }
 
+// function to parse file into vector of integers grouped by \n\n
+fn parse_file(filename: &str) -> Vec<Vec<i32>> {
+    let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
+    let mut groups = Vec::new();
+    for group in contents.split("\n\n") {
+        let mut items = Vec::new();
+        for item in group.split_whitespace() {
+            items.push(item.parse::<i32>().unwrap());
+        }
+        groups.push(items);
+    }
+    groups
+}
 fn main() {
-
-
-    let file: Vec<String> = fs::read_to_string("../list.txt")
-        .expect("Should find file")
-        .split("\n")
-        .map(|s| s.to_string())
-        .collect();
-
-    
-    let output: Vec<Vec<i32>> = file.into_iter().fold(Vec::new(), |mut acc, x| {
-        
-        if x == "" || acc.is_empty() {
-            acc.push(Vec::new());
-        }
-        if x != "" {
-            let int = x.parse::<i32>().unwrap();
-            acc.last_mut().unwrap().push(int);
-        }
-
-        acc
-        
-    });
+    let items = parse_file("../list.txt");
 
     let mut elves: Vec<i32> = Vec::new();
 
-    for lines in output {
+    for lines in items {
         elves.push(sum(&lines));
     }
 
     let top_elves: Vec<i32> = nlargest(&elves, 3);
+    
     println!("Top 3 elves: {:?}", top_elves);
     println!("{:?}", largest(&elves));
     println!("{:?}", sum(&top_elves));
