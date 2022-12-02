@@ -77,4 +77,4 @@ new_scores = []
 for round in rounds:
     new_scores.append(determine_score(round))
 
-print(sum(new_scores))
+print(f"Answer to round #2: {sum(new_scores)}")
