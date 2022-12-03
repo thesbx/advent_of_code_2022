@@ -1,3 +1,4 @@
+from itertools import islice 
 file = open("list.txt", "r")
 lines = file.read()
 
@@ -89,6 +90,7 @@ def sum(arr):
         sum = sum + i
     return(sum)
 
+
 answer = []
 for item in items:
     common_char = common_char_in_list(item)
@@ -96,4 +98,5 @@ for item in items:
     answer.append(index)
 
 print(sum(answer))
+
 
