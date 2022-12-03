@@ -36,13 +36,6 @@ def sum(arr):
         sum = sum + i
     return(sum)
 
-
-scores = []
-for round in rounds:
-    scores.append(get_winner(round))
-
-print(f"Answer to round #1: {sum(scores)}")
-
 # Round 2
 
 guide = {
@@ -54,6 +47,7 @@ guide = {
 def determine_score(round):
     result = guide[round[1]]
     opponent_score = rock_paper_scissors[round[0]]
+
     if opponent_score == 1 and result == 6:
         return 2 + result
     elif opponent_score == 2 and result == 6:
@@ -73,8 +67,12 @@ def determine_score(round):
     elif opponent_score == 3 and result == 0:
         return 2 + result
 
-new_scores = []
+new_scores = []    
+
+scores = []
 for round in rounds:
     new_scores.append(determine_score(round))
+    scores.append(get_winner(round))
 
+print(f"Answer to round #1: {sum(scores)}")
 print(f"Answer to round #2: {sum(new_scores)}")
