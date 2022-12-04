@@ -73,6 +73,17 @@ def common_char_in_list(array):
             if char1 == char2:
                 return char1
 
+def common(array):
+    chars = []
+    for arr in array:
+        result =  set(arr[0])
+        for curr in arr[1:]:
+            result.intersection_update(curr)
+        r = "".join(result)
+        c = get_index(r)
+        chars.append(c)
+    return chars
+
 def get_index(char):
     if char in a_z:
         return a_z[char]
@@ -97,14 +108,12 @@ def create_batches(arr,n):
  while (batch := list(islice(it, n))):
      yield batch 
 
-group = create_batches(items, 3)
-print(list(group))
+group = list(create_batches(items, 3))
 answer = []
 for item in items:
     common_char = common_char_in_list(item)
     index = get_index(common_char)
     answer.append(index)
-
 print(sum(answer))
-
+print(sum(common(group)))
 
