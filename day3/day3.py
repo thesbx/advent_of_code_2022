@@ -90,7 +90,15 @@ def sum(arr):
         sum = sum + i
     return(sum)
 
+def create_batches(arr,n):
+ if n < 1:
+     raise ValueError("n must be at least one")
+ it = iter(arr)
+ while (batch := list(islice(it, n))):
+     yield batch 
 
+group = create_batches(items, 3)
+print(list(group))
 answer = []
 for item in items:
     common_char = common_char_in_list(item)
