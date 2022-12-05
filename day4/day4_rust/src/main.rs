@@ -17,7 +17,7 @@ fn parse_file(filename: &str) -> Vec<Vec<Vec<i32>>> {
     groups
 }
 
-/// Generate a vector with a start and end size, where the end is including in the final vector.
+/// Generate a vector with a start and end size, where the end is included in the final vector.
 /**
 ---
 Examples:
