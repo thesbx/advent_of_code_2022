@@ -44,15 +44,29 @@ def parse_commands(commands, arr):
         for i in range(command[0]):
             item = arr[command[1] - 1].pop()
             arr[command[2] - 1].append(item)
-                
-
     return arr
-new = parse_commands(command, stripped)
-answer = []
-for index, a in enumerate(new):
-    answer.append(a[-1])
 
-print(answer)
+def parse_commands_v2(commands, arr):
+    for command in commands:
+        length = len(arr[command[2] - 1])
+        for i in range(command[0]):
+            item = arr[command[1] - 1].pop()
+            arr[command[2] - 1].insert(length, item)
+    return arr
+
+def find_answer(arr, part):
+    answer = []
+    a_ = arr
+    if part == 1:
+        l = parse_commands(command, a_)
+    elif part == 2:
+        l = parse_commands_v2(command, a_)
+    for a in l:
+        answer.append(a[-1])
+    return answer
+
+print(find_answer(stripped, 2))
+
 
 
 
