@@ -102,11 +102,14 @@ def sum(arr):
     return(sum)
 
 def create_batches(arr,n):
- if n < 1:
-     raise ValueError("n must be at least one")
- it = iter(arr)
- while (batch := list(islice(it, n))):
-     yield batch 
+    """
+    n is the number of elements in an array to group together as a batch. Returns a list of elements grouped together by batch size.
+    """
+    if n < 1:
+        raise ValueError("n must be at least one")
+    it = iter(arr)
+    while (batch := list(islice(it, n))):
+        yield batch 
 
 group = list(create_batches(items, 3))
 answer = []
