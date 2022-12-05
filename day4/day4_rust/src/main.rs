@@ -17,7 +17,7 @@ fn parse_file(filename: &str) -> Vec<Vec<Vec<i32>>> {
     groups
 }
 
-fn is_sub<T: PartialEq>(haystack: &[T], needle: &[T], strict: bool) -> bool {
+fn find<T: PartialEq>(haystack: &[T], needle: &[T], strict: bool) -> bool {
     if strict {
         return needle.iter().all(|x| haystack.contains(&x));
     } else {
@@ -33,11 +33,11 @@ fn compare_ranges(arr: &Vec<Vec<Vec<i32>>>, strict: bool) -> usize {
         let left: Vec<i32> = (items[0][0]..items[0][1] + 1).collect();
         let right: Vec<i32> = (items[1][0]..items[1][1] + 1).collect();
         
-        if is_sub(&right, &left, strict) {
+        if find(&right, &left, strict) {
             contains.push(true);
         }
 
-        if is_sub(&left, &right, strict) {
+        if find(&left, &right, strict) {
             contains.push(true);
         }
 
