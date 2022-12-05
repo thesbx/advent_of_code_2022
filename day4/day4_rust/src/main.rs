@@ -17,6 +17,11 @@ fn parse_file(filename: &str) -> Vec<Vec<Vec<i32>>> {
     groups
 }
 
+fn generate_vec(start: i32 , end: i32) -> Vec<i32> {
+    let vec = (start..end + 1).collect();
+    return vec;
+}
+
 fn find<T: PartialEq>(haystack: &[T], needle: &[T], strict: bool) -> bool {
     if strict {
         return needle.iter().all(|x| haystack.contains(&x));
@@ -30,8 +35,8 @@ fn compare_ranges(arr: &Vec<Vec<Vec<i32>>>, strict: bool) -> usize {
     let mut ranges = Vec::new();
     for items in arr {
         let mut contains = Vec::new();
-        let left: Vec<i32> = (items[0][0]..items[0][1] + 1).collect();
-        let right: Vec<i32> = (items[1][0]..items[1][1] + 1).collect();
+        let left: Vec<i32> = generate_vec(items[0][0], items[0][1]);
+        let right: Vec<i32> = generate_vec(items[1][0],items[1][1]);
         
         if find(&right, &left, strict) {
             contains.push(true);
