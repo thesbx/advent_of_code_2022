@@ -94,7 +94,8 @@ def get_index(char):
 
 def sum(arr):
     """
-    Sums all the numbers in a list.
+    Sums all elements in a list.
+    ---
     """
     sum = 0
     for i in arr:
@@ -103,6 +104,8 @@ def sum(arr):
 
 def create_batches(arr,n):
     """
+    Creates a list of <n> elements in a batch.
+    ---
     n is the number of elements in an array to group together as a batch. Returns a list of elements grouped together by batch size.
     """
     if n < 1:
