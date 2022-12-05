@@ -17,11 +17,26 @@ fn parse_file(filename: &str) -> Vec<Vec<Vec<i32>>> {
     groups
 }
 
+/// Generate a vector with a start and end size, where the end is including in the final vector.
+/**
+Example:
+```
+generate_vec(30, 127) // -> [30, 31, 32...127]
+```
+*/
 fn generate_vec(start: i32 , end: i32) -> Vec<i32> {
     let vec = (start..end + 1).collect();
     return vec;
 }
 
+/// Compare elements of vectors.
+/**
+```
+find([1, 2, 3, 4], [2, 3], true) // -> true | 2, 3 are both in the haystack
+find([1, 2, 3, 4], [2, 9], true) // -> false | 2 is, but 9 isn not.
+find([1, 2, 3, 4], [2, 9], false) // -> true | One of the elements is in the haystack.
+```
+*/
 fn find<T: PartialEq>(haystack: &[T], needle: &[T], strict: bool) -> bool {
     if strict {
         return needle.iter().all(|x| haystack.contains(&x));
