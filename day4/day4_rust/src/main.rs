@@ -19,7 +19,8 @@ fn parse_file(filename: &str) -> Vec<Vec<Vec<i32>>> {
 
 /// Generate a vector with a start and end size, where the end is including in the final vector.
 /**
-Example:
+---
+Examples:
 ```
 generate_vec(30, 127) // -> [30, 31, 32...127]
 ```
@@ -31,6 +32,8 @@ fn generate_vec(start: i32 , end: i32) -> Vec<i32> {
 
 /// Compare elements of vectors.
 /**
+---
+Examples:
 ```
 find([1, 2, 3, 4], [2, 3], true) // -> true | 2, 3 are both in the haystack
 find([1, 2, 3, 4], [2, 9], true) // -> false | 2 is, but 9 isn not.
@@ -46,6 +49,7 @@ fn find<T: PartialEq>(haystack: &[T], needle: &[T], strict: bool) -> bool {
     
 }
 
+/// Uses the needle in a haystack algorithm to compare items in a vector. Returns the number of true results.
 fn compare_ranges(arr: &Vec<Vec<Vec<i32>>>, strict: bool) -> usize {
     let mut ranges = Vec::new();
     for items in arr {
