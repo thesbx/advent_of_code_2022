@@ -57,11 +57,7 @@ fn compare_ranges(arr: &Vec<Vec<Vec<i32>>>, strict: bool) -> usize {
         let left: Vec<i32> = generate_vec(items[0][0], items[0][1]);
         let right: Vec<i32> = generate_vec(items[1][0],items[1][1]);
         
-        if find(&right, &left, strict) {
-            contains.push(true);
-        }
-
-        if find(&left, &right, strict) {
+        if find(&right, &left, strict) || find(&left, &right, strict) {
             contains.push(true);
         }
 
