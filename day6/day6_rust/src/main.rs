@@ -7,6 +7,7 @@ fn parse_file(filename: &str) -> String {
     output 
 }
 
+/// First attempt at sliding window before knowing what the algorythm was.
 fn sliding_window_no_overlap(slice: &Vec<char>, n: usize) -> Vec<String> {
     let mut items = Vec::new();
     for c in slice.chunks(n) {
