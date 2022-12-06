@@ -7,6 +7,7 @@ fn parse_file(filename: &str) -> String {
     output 
 }
 
+/// Set window of n length and scan string for first index where string does not have duplicates
 fn sliding_window(str: &String, n: usize) -> usize { 
     let result = str 
     .as_bytes()
