@@ -7,6 +7,19 @@ fn parse_file(filename: &str) -> String {
     output 
 }
 
+fn sliding_window_no_overlap(slice: &Vec<char>, n: usize) -> Vec<String> {
+    let mut items = Vec::new();
+    for c in slice.chunks(n) {
+        let mut unique = HashSet::new();
+        let value = c.iter().all(|x| unique.insert(x));
+        let string = c.iter().cloned().collect::<String>();
+        if value {
+            items.push(string);
+        }
+    }
+    items
+}
+
 /// Set window of n length and scan string for first index where string does not have duplicates
 fn sliding_window(str: &String, n: usize) -> usize { 
     let result = str 
