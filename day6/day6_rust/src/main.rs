@@ -13,7 +13,7 @@ fn parse_file_to_vec(filename: &str) -> Vec<char>{
     output 
 }
 
-/// First attempt at sliding window before knowing what the algorythm was.
+/// First attempt at sliding window before knowing what the algorithm was.
 fn sliding_window_no_overlap(slice: &Vec<char>, n: usize) -> Vec<String> {
     let mut items = Vec::new();
     for c in slice.chunks(n) {
