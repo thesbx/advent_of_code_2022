@@ -7,6 +7,12 @@ fn parse_file(filename: &str) -> String {
     output 
 }
 
+fn parse_file_to_vec(filename: &str) -> Vec<char>{
+    let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
+    let output = contents.chars().collect::<Vec<char>>();
+    output 
+}
+
 /// First attempt at sliding window before knowing what the algorythm was.
 fn sliding_window_no_overlap(slice: &Vec<char>, n: usize) -> Vec<String> {
     let mut items = Vec::new();
@@ -35,8 +41,10 @@ fn sliding_window(str: &String, n: usize) -> usize {
 
 fn main() {
     let string = parse_file("../input.txt");
-    let results_part1 = sliding_window(&string, 4);
+    let vec = parse_file_to_vec("../input.txt");
+    let results_part1 = sliding_window_no_overlap(&vec, 14);
     let results_part2 = sliding_window(&string, 14);
-    println!("{:?}", results_part1);
+    let target = string.find(&results_part1[0]);
+    println!("{:?}", target);
     println!("{:?}", results_part2);
 }
