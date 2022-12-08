@@ -3,15 +3,17 @@ use std::fs;
 
 fn parse_file(filename: &str) -> Vec<Vec<u32>> {
     let contents = fs::read_to_string(filename).expect("No file");
-    let mut matrix: Vec<Vec<u32>> = Vec::new();
-    for line in contents.split("\n") {
-        let mut row: Vec<u32> = Vec::new();
-        for i in line.chars() {
-            row.push(i.to_digit(10).unwrap()); 
-        }
-        matrix.push(row);
-    }
-    matrix
+    let trees = contents
+        .lines()
+        .map(|line| {
+            return line
+                .chars()
+                .filter_map(|x| x.to_digit(10))
+                .map(|x| x as u32)
+                .collect::<Vec<u32>>();
+        })
+        .collect::<Vec<Vec<u32>>>();
+    return trees;
 }
 
 fn travers_matrix(grid: &Vec<Vec<u32>>) -> (u64, u64) {
