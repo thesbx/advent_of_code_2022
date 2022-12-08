@@ -16,6 +16,30 @@ fn parse_file(filename: &str) -> Vec<Vec<u32>> {
     return trees;
 }
 
+#[macro_export]
+macro_rules! matrix_coordinates{
+    ( $matrix: ident, $row:ident, $col:ident, $x:ident, $y:ident, $visible:ident ) => {
+        {
+            if $matrix[$x][$y] >= $matrix[$row][$col] {
+                $visible = false;
+            }
+        }
+    };
+}
+#[macro_export]
+macro_rules! visibility {
+    ( $vis:ident, $counter:ident) => {
+        {
+            if $vis {
+                $counter += 1;
+                continue;
+            } else {
+                $vis = true;
+            }
+        }
+    }
+}
+
 fn travers_matrix(grid: &Vec<Vec<u32>>) -> (u64, u64) {
     let mut count_visible = 0_u64;
     for r in 1..grid[0].len() - 1 {
@@ -23,52 +47,25 @@ fn travers_matrix(grid: &Vec<Vec<u32>>) -> (u64, u64) {
             let mut visible = true;
 
             for w in (0..c).rev() {
-                if grid[r][w] >= grid[r][c] {
-                    visible = false;
-                    break;
-                }
+                matrix_coordinates!(grid, r, c, r, w, visible);
             }
 
-            if visible {
-                count_visible += 1;
-                continue;
-            } else {
-                visible = true;
-            }
+            visibility!(visible, count_visible);
 
             for e in c + 1..grid[0].len() {
-                if grid[r][e] >= grid[r][c] {
-                    visible = false;
-                    break;
-                }
+                matrix_coordinates!(grid, r, c, r, e, visible);
             }
 
-            if visible {
-                count_visible += 1;
-                continue;
-            } else {
-                visible = true;
-            }
+            visibility!(visible, count_visible);
 
             for n in (0..r).rev() {
-                if grid[n][c] >= grid[r][c] {
-                    visible = false;
-                    break;
-                }
+                matrix_coordinates!(grid, r, c, n, c, visible);
             }
 
-            if visible {
-                count_visible += 1;
-                continue;
-            } else {
-                visible = true;
-            }
+            visibility!(visible, count_visible);
 
             for s in r + 1..grid.len() {
-                if grid[s][c] >= grid[r][c] {
-                    visible = false;
-                    break;
-                }
+                matrix_coordinates!(grid, r, c, s, c, visible);
             }
             if visible {
                 count_visible += 1;
