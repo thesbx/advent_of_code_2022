@@ -1,21 +1,6 @@
 use anyhow::Result;
 use std::fs;
 
-fn parse_file(filename: &str) -> Vec<Vec<u32>> {
-    let contents = fs::read_to_string(filename).expect("No file");
-    let trees = contents
-        .lines()
-        .map(|line| {
-            return line
-                .chars()
-                .filter_map(|x| x.to_digit(10))
-                .map(|x| x as u32)
-                .collect::<Vec<u32>>();
-        })
-        .collect::<Vec<Vec<u32>>>();
-    return trees;
-}
-
 #[macro_export]
 macro_rules! matrix_coordinates{
     ( $matrix: ident, $row:ident, $col:ident, $x:ident, $y:ident, $visible:ident ) => {
@@ -40,7 +25,17 @@ macro_rules! visibility {
     }
 }
 
-fn travers_matrix(grid: &Vec<Vec<u32>>) -> (u64, u64) {
+fn travers_matrix(filename: &str) -> (u64, u64) {
+    let grid = fs::read_to_string(filename).expect("No File")
+        .lines()
+        .map(|line| {
+            return line
+                .chars()
+                .filter_map(|x| x.to_digit(10))
+                .map(|x| x as u32)
+                .collect::<Vec<u32>>();
+        })
+        .collect::<Vec<Vec<u32>>>();
     let mut count_visible = 0_u64;
     for r in 1..grid[0].len() - 1 {
         for c in 1..grid.len() - 1 { 
@@ -114,8 +109,7 @@ fn travers_matrix(grid: &Vec<Vec<u32>>) -> (u64, u64) {
     )
 }
 fn main() -> Result<()> {
-    let input = parse_file("../prod.txt");
-    let (p1, p2) = travers_matrix(&input);
+    let (p1, p2) = travers_matrix("../prod.txt");
     println!("{:?}", p1); 
     println!("{:?}", p2); 
 
