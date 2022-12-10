@@ -2,11 +2,7 @@ use std::fs;
 
 /// Returns the sum of all items in a vector.
 fn sum(items: &Vec<i32>) -> i32 {
-    let mut sum: i32 = 0;
-    for item in items {
-        sum += item;
-    }
-    sum
+    return items.iter().fold(0, |acc, x| acc + x);
 }
 
 /// Returns the largest number in a vector.
