@@ -6,15 +6,6 @@ struct RPS<T> {
     scissors: T,
 }
 
-/// Returns the sum of all items in a vector.
-fn sum(items: &Vec<i32>) -> i32 {
-    let mut sum: i32 = 0;
-    for item in items {
-        sum += item;
-    }
-    sum
-}
-
 /// Parses a file and returns a vector of integers grouped into smaller vectors.
 fn parse_file(filename: &str) -> Vec<Vec<String>> {
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
@@ -172,8 +163,8 @@ fn main() {
     let scores_two = strategy_guide(&items);
     let winners_two = correct_scores(&scores_two);
 
-    let sum_one = sum(&winners);
-    let sum_two = sum(&winners_two);
+    let sum_one = aoc_lib::sum(&winners);
+    let sum_two = aoc_lib::sum(&winners_two);
     println!("Answer to round #1: {:?}", sum_one);
     println!("Answer to round #2: {:?}", sum_two);
 }
