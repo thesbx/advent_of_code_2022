@@ -1,4 +1,5 @@
 /// Returns the sum of all elements in a vector
+///
 pub fn sum(arr: &[i32]) -> i32 {
     return arr.iter().fold(0, |acc, n| acc + n);
 }
